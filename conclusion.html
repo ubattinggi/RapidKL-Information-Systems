@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Conclusion — RapidKL IS Deck</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root{
+      --bg-1: rgba(255,255,255,0.02);
+      --muted: #9fbcd6;
+      --accent-pink: #ff8ec1;
+      --accent-cyan: #9fe3ff;
+      --card-bg: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    }
+
+    html,body {
+      background: radial-gradient(1200px 600px at 5% 10%, rgba(0,60,80,0.22), transparent 10%),
+                  linear-gradient(180deg,#04060a,#071021 120%);
+      min-height:100%;
+      margin:0;
+      font-family: 'Inter', sans-serif;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      color: #dff6ff;
+    }
+
+    .container-max { max-width:1100px; margin:0 auto; padding:28px; box-sizing:border-box; }
+
+    /* header */
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:6px 0 18px; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:700; color:#9fe3ff; }
+    .logo-glow { font-size:22px; filter:drop-shadow(0 4px 12px rgba(0,245,255,0.12)); }
+    .brand-text { font-family: 'Orbitron', sans-serif; color:#7fe7ff; font-size:1.05rem; }
+
+    .fun-nav { display:flex; gap:18px; align-items:center; }
+    .fun-nav .nav-link { display:flex; gap:8px; align-items:center; color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:999px; transition:background .18s ease, color .14s ease; }
+    .fun-nav .nav-link.active { background: linear-gradient(90deg,#2a6b78 0%, #1c3542 100%); color:#dff6ff; box-shadow:0 8px 20px rgba(0,0,0,0.6); }
+    .fun-nav .label { font-size:0.95rem; }
+
+    /* page header */
+    .page-title { font-family:'Orbitron', sans-serif; color:#dff6ff; font-size:2rem; margin:12px 0 6px; }
+    .subtitle { color:var(--muted); margin-bottom:18px; }
+
+    /* Sections */
+    .section {
+      background: var(--card-bg);
+      border:1px solid rgba(255,255,255,0.05);
+      border-radius:14px;
+      padding:20px 22px;
+      box-shadow:0 12px 36px rgba(0,0,0,0.55);
+      margin-bottom:34px;
+      transition: transform .2s ease, box-shadow .2s ease, opacity .4s ease;
+      opacity:0;
+      transform: translateY(18px) scale(0.995);
+    }
+    .section.revealed { opacity:1; transform: translateY(0) scale(1); }
+
+    /* Section headings */
+    .section h2 {
+      margin:0 0 12px 0;
+      font-family: 'Inter', sans-serif; /* <- using Inter per request */
+      font-size:1.45rem;
+      color: var(--accent-pink);
+      font-weight:700;
+      letter-spacing:0.3px;
+    }
+
+    .section p { color:#dff6ff; line-height:1.6; margin:0; font-size:0.98rem; }
+
+    /* Benefits grid (cards similar to screenshot) */
+    .benefits-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap:18px;
+      margin-top:16px;
+    }
+
+    .benefit-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(0,0,0,0.06));
+      border:1px solid rgba(255,255,255,0.02);
+      border-radius:12px;
+      padding:16px;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+      transition: transform .14s ease, box-shadow .14s ease;
+      min-height:110px;
+    }
+    .benefit-card:hover { transform: translateY(-6px); box-shadow: 0 22px 48px rgba(0,255,255,0.04); }
+
+    .benefit-title {
+      font-family: 'Inter', sans-serif; /* <- subheading uses Inter */
+      color: #ff9fc8;
+      font-weight:700;
+      margin:0 0 8px 0;
+      font-size:1.02rem;
+      letter-spacing:0.2px;
+    }
+    .benefit-desc { color:#dff6ff; margin:0; font-size:0.94rem; line-height:1.45; }
+
+    /* Recommendations grid (kept from your existing design) */
+    .rec-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap:16px;
+      margin-top:12px;
+    }
+    .rec-item {
+      padding:16px 18px;
+      border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.014), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.55);
+      min-height:92px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      gap:8px;
+      transition: transform .16s ease;
+    }
+    .rec-item:hover { transform: translateY(-6px); box-shadow: 0 20px 44px rgba(0,255,200,0.04); }
+    .rec-item h3 {
+      font-family:'Inter',sans-serif;
+      font-size:1.02rem;
+      margin:0;
+      color:var(--accent-pink);
+      font-weight:700;
+    }
+    .rec-item p { margin:0; color:#dff6ff; font-size:0.95rem; line-height:1.45; }
+
+    /* footer */
+    footer { text-align:center; color:#8fb7cf; margin-top:28px; font-size:0.9rem; }
+
+    /* responsive */
+    @media (max-width:720px){
+      .container-max { padding:18px; }
+      .page-title { font-size:1.5rem; }
+      .benefits-grid { gap:14px; }
+    }
+  </style>
+</head>
+
+<body class="page lit dark">
+  <header class="topbar container-max">
+    <div class="brand">
+      <span class="logo-glow">🚇</span>
+      <span class="brand-text">RapidKL — IS Deck</span>
+    </div>
+
+    <nav class="fun-nav" aria-label="Primary">
+      <a class="nav-link" href="index.html"><span class="icon">🏠</span><span class="label">Home</span></a>
+      <a class="nav-link" href="exec.html"><span class="icon">⚡</span><span class="label">Summary</span></a>
+      <a class="nav-link" href="intro.html"><span class="icon">🛰️</span><span class="label">Introduction</span></a>
+      <a class="nav-link" href="lit.html"><span class="icon">🧩</span><span class="label">Systems</span></a>
+      <a class="nav-link" href="analysis.html"><span class="icon">🔧</span><span class="label">Analysis</span></a>
+      <a class="nav-link active" href="conclusion.html"><span class="icon">✔️</span><span class="label">Conclusion</span></a>
+    </nav>
+  </header>
+
+  <main class="container-max">
+    <h1 class="page-title">✔️ Conclusion</h1>
+
+    <!-- Key insight -->
+    <section class="section" id="insight">
+      <h2>🧠 Key Insight</h2>
+      <p>Information Systems give RapidKL real-time operational visibility and analytical power — enabling teams to plan, reduce response times, and manage services proactively rather than reactively.</p>
+    </section>
+
+    <!-- Benefits (based on your paragraph, presented as cards) -->
+    <section class="section" id="benefits">
+      <h2>💡 Benefits of IS in Business</h2>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-title">Minimise Human Errors</div>
+          <div class="benefit-desc">Automation and system integration reduce mistakes in ticketing, reporting, and maintenance tracking.</div>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-title">Reduce Workload</div>
+          <div class="benefit-desc">IS streamlines admin tasks so staff can focus on higher-value work and customer service.</div>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-title">Real-Time Monitoring</div>
+          <div class="benefit-desc">Live data helps RapidKL detect and address service or technical issues quickly.</div>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-title">Predictive Analytics</div>
+          <div class="benefit-desc">Analytics allow early detection of potential delays, equipment failures, and service risks.</div>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-title">Better Communication</div>
+          <div class="benefit-desc">Shared data improves coordination across departments to align services with commuter needs.</div>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-title">Cost Efficiency</div>
+          <div class="benefit-desc">IS enables smarter resource use and cost control, supporting long-term operational sustainability.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Recommendations (short cards) -->
+    <section class="section" id="recommendations">
+      <h2>🚀 Recommendations</h2>
+
+      <div class="rec-grid">
+        <div class="rec-item">
+          <h3>Enhance data integration</h3>
+          <p>Connect HRIS, ERP and AFC for smoother workflows and faster decisions.</p>
+        </div>
+
+        <div class="rec-item">
+          <h3>Strengthen cybersecurity</h3>
+          <p>Invest in encryption, monitoring and incident response to protect commuter and financial data.</p>
+        </div>
+
+        <div class="rec-item">
+          <h3>Train staff regularly</h3>
+          <p>Offer ongoing digital skills and system training to boost adoption and reduce errors.</p>
+        </div>
+
+        <div class="rec-item">
+          <h3>Adopt AI & IoT</h3>
+          <p>Use AI for forecasting and IoT for predictive maintenance to improve reliability.</p>
+        </div>
+
+        <div class="rec-item">
+          <h3>Plan for sustainability</h3>
+          <p>Budget for maintenance and security so digital gains remain reliable long-term.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container-max">
+    <p>© 2025 RapidKL IS Deck</p>
+  </footer>
+
+  <script>
+    // simple reveal for sections
+    (function(){
+      const sections = document.querySelectorAll('.section');
+      if (!('IntersectionObserver' in window)) {
+        sections.forEach(s => s.classList.add('revealed'));
+        return;
+      }
+      const obs = new IntersectionObserver((entries, o)=>{
+        entries.forEach((ent,i)=>{
+          if (ent.isIntersecting) {
+            setTimeout(()=> ent.target.classList.add('revealed'), 80 * i);
+            o.unobserve(ent.target);
+          }
+        });
+      }, { threshold: 0.16 });
+      sections.forEach(s => obs.observe(s));
+    })();
+  </script>
+</body>
+</html>

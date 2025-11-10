@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Introduction — RapidKL (Distinct Style)</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    /* ---------- Page frame (nav/header same look) ---------- */
+    html,body { height:auto !important; overflow-y:auto !important; }
+    .container-max { max-width:1100px; margin:0 auto; padding:18px; }
+    .page-title { font-family:'Orbitron',sans-serif; color:#dff6ff; font-size:2.1rem; margin:12px 0 6px; }
+    .subtitle { color:#a7c6dc; margin-bottom:18px; }
+
+    /* ---------- New distinct card style ---------- */
+    /* Instead of the dark rounded boxes used in Literature page,
+       this uses frosted glass, brighter accents, and vertical stacked layout. */
+    .intro-wrap {
+      display:flex;
+      gap:28px;
+      align-items:flex-start;
+      margin-top:8px;
+    }
+
+    /* left column: the stacked cards */
+    .col-left { flex:1 1 620px; }
+    .col-right { flex:0 0 320px; }
+
+    /* single 'panel' card (tall stacked style) */
+    .panel {
+      background: linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01));
+      backdrop-filter: blur(6px);
+      border-radius:16px;
+      padding:18px;
+      margin-bottom:16px;
+      border:1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 26px rgba(0,0,0,0.45);
+      transition: transform .18s ease, box-shadow .18s ease;
+      overflow:hidden;
+    }
+    .panel:hover { transform: translateY(-6px); box-shadow:0 18px 40px rgba(0,0,0,0.55); }
+
+    .panel-head {
+      display:flex; gap:14px; align-items:center; cursor:pointer;
+      user-select:none;
+    }
+    .panel-icon {
+      width:72px; height:72px; border-radius:14px;
+      display:grid; place-items:center; font-size:30px;
+      background: linear-gradient(90deg,#7de3ff33,#ff9ad933);
+      color:#0ffaf9;
+      box-shadow: inset 0 -6px 14px rgba(0,0,0,0.15);
+      flex-shrink:0;
+    }
+
+    .panel-meta { flex:1; }
+    .panel-title { font-size:1.15rem; color:#ff8ec1; font-weight:700; margin-bottom:6px; }
+    .panel-sub { color:#9fc2d9; font-size:0.98rem; }
+
+    .panel-body {
+      margin-top:14px;
+      line-height:1.6;
+      color:#e9fbff;
+      max-height:0; overflow:hidden;
+      transition: max-height 360ms cubic-bezier(.2,.9,.2,1), opacity 220ms ease;
+      opacity:0; transform: translateY(-6px);
+    }
+    .panel.open .panel-body { opacity:1; transform: translateY(0); max-height:420px; }
+
+    .panel-foot { margin-top:12px; color:#99c3d8; font-size:0.88rem; }
+
+    /* ---------- Right column: quick facts + big CTA ---------- */
+    .card-aside {
+      background: linear-gradient(180deg, rgba(255,255,255,0.018), rgba(255,255,255,0.01));
+      border-radius:14px; padding:18px; border:1px solid rgba(255,255,255,0.03);
+      box-shadow:0 8px 22px rgba(0,0,0,0.5);
+      color:#dff6ff;
+    }
+    .aside-title { color:#8be7ff; font-weight:700; margin-bottom:12px; font-size:1.05rem; }
+    .fact { margin-bottom:10px; color:#bfe8f7; }
+
+    .cta {
+      display:inline-block; margin-top:12px; padding:10px 14px; border-radius:12px;
+      background: linear-gradient(90deg,#7be5ff,#ff8ec1); color:#012; font-weight:700; text-decoration:none;
+      box-shadow:0 8px 26px rgba(0,0,0,0.4);
+    }
+
+    /* different chevron style for this page */
+    .page-chev { float:right; color:#9fe0ff; font-size:20px; }
+
+    /* smaller screens: stack columns */
+    @media (max-width:980px) {
+      .intro-wrap { flex-direction:column; }
+      .col-right { order:2; width:100%; }
+      .col-left { order:1; width:100%; }
+      .panel-icon { width:56px; height:56px; font-size:22px; }
+    }
+  </style>
+</head>
+
+<body class="page lit dark">
+  <header class="topbar fun container-max">
+    <div class="brand"><span class="logo-glow">🚇</span><span class="brand-text">RapidKL — IS Deck</span></div>
+    <nav class="fun-nav" aria-label="Primary">
+      <a class="nav-link" href="index.html"><span class="icon">🏠</span><span class="label">Home</span></a>
+      <a class="nav-link" href="exec.html"><span class="icon">⚡</span><span class="label">Summary</span></a>
+      <a class="nav-link active" href="intro.html"><span class="icon">🛰️</span><span class="label">Introduction</span></a>
+      <a class="nav-link" href="lit.html"><span class="icon">🧩</span><span class="label">Systems</span></a>
+      <a class="nav-link" href="analysis.html"><span class="icon">🔧</span><span class="label">Analysis</span></a>
+      <a class="nav-link" href="conclusion.html"><span class="icon">✔️</span><span class="label">Conclusion</span></a>
+    </nav>
+  </header>
+
+  <main class="content container-max">
+    <h1 class="page-title">Introduction</h1>
+        <div class="intro-wrap">
+      <!-- Left column: stacked panels -->
+      <div class="col-left">
+
+        <section class="panel" data-key="is">
+          <div class="panel-head" tabindex="0" role="button" aria-expanded="false">
+            <div class="panel-icon">🧠</div>
+            <div class="panel-meta">
+              <div class="panel-title">What is an Information System?</div>
+              <div class="panel-sub">Short: people + technology + processes that turn data into useful information.</div>
+            </div>
+            <div class="page-chev">›</div>
+          </div>
+
+          <div class="panel-body" aria-hidden="true">
+            <p><strong>Information System (IS)</strong> is a socio-technical system that combines information technology, people, and organizational processes to collect, process, store, and distribute information. It is not limited to just computers or software but also includes the human and social aspects involved in creating, sharing, and using information to support decision-making and improve organizational performance.</p>
+          </div>
+        </section>
+
+        <section class="panel" data-key="why">
+          <div class="panel-head" tabindex="0" role="button" aria-expanded="false">
+            <div class="panel-icon">📈</div>
+            <div class="panel-meta">
+              <div class="panel-title">Why IS matters in business</div>
+              <div class="panel-sub">Drives innovation, empowers decisions, and strengthens business success.</div>
+            </div>
+            <div class="page-chev">›</div>
+          </div>
+
+          <div class="panel-body" aria-hidden="true">
+            <p>Information Systems (IS) are the engine behind every successful business today. They keep things running smoothly, connecting finance, marketing, operations, and HR so information flows faster and smarter. IS doesn’t just automate work but it also empowers teams to make quick, informed decisions, adapt to changes, and stay ahead of the competition. By driving innovation and improving customer experiences, IS forms the heartbeat of modern business success.</p>
+          </div>
+        </section>
+
+        <section class="panel" data-key="purpose">
+          <div class="panel-head" tabindex="0" role="button" aria-expanded="false">
+            <div class="panel-icon">🎯</div>
+            <div class="panel-meta">
+              <div class="panel-title">Purpose of this report</div>
+              <div class="panel-sub">What this assignment aims to show.</div>
+            </div>
+            <div class="page-chev">›</div>
+          </div>
+
+          <div class="panel-body" aria-hidden="true">
+            <p>This report examines how Information Systems (IS) enhance business operations at RapidKL, Malaysia’s leading public transportation provider. It explores how different IS types; operational, management, and strategic improve efficiency, coordination, and workflow across divisions. Focusing on six areas; operations, ticketing, maintenance, finance, human resources, and marketing, the report highlights how IS boosts service delivery, internal efficiency, and passenger satisfaction. Overall, IS is shown to be vital for RapidKL’s organizational performance, reliability, and competitive advantage.</p>
+          </div>
+        </section>
+
+        <section class="panel" data-key="scope">
+          <div class="panel-head" tabindex="0" role="button" aria-expanded="false">
+            <div class="panel-icon">🗺️</div>
+            <div class="panel-meta">
+              <div class="panel-title">Scope; what this covers</div>
+              <div class="panel-sub">Business processes, decision-making, and management levels.</div>
+            </div>
+            <div class="page-chev">›</div>
+          </div>
+
+          <div class="panel-body" aria-hidden="true">
+            <p>The scope of this report covers the use and impact of Information Systems (IS) in RapidKL’s operations, focusing on how they support business processes, management, and decision-making across key areas such as ticketing, maintenance, finance, human resources, and marketing.</p>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Right column: quick facts and CTA (different look) -->
+      <aside class="col-right">
+        <div class="card-aside">
+          <div class="aside-title">Quick facts</div>
+          <div class="fact"><strong>RapidKL</strong> operates LRT, MRT, Monorail and buses across the Klang Valley.</div>
+          <div class="fact">Established 2004 — serves millions of commuters daily.</div>
+          <div class="fact">Uses ticketing + analytics for scheduling and predictive maintenance.</div>
+
+          <a class="cta" href="index.html">Launch full report</a>
+        </div>
+      </aside>
+    </div>
+  </main>
+
+  <footer class="foot container-max" style="margin-top:36px;">
+    <a class="small-link" href="index.html">← Back</a>
+  </footer>
+
+  <script>
+    // Panel expand/collapse logic for this distinct-style page
+    (function(){
+      const panels = document.querySelectorAll('.panel');
+      const singleOpen = true; // keep one open at a time
+
+      panels.forEach(p=>{
+        const head = p.querySelector('.panel-head');
+        const body = p.querySelector('.panel-body');
+
+        // set initial ARIA
+        head.setAttribute('role','button');
+        head.setAttribute('aria-expanded','false');
+        body.setAttribute('aria-hidden','true');
+
+        function open(){
+          if(singleOpen) {
+            panels.forEach(x => { if(x !== p) {
+              x.classList.remove('open');
+              x.querySelector('.panel-head').setAttribute('aria-expanded','false');
+              x.querySelector('.panel-body').setAttribute('aria-hidden','true');
+            }});
+          }
+          p.classList.add('open');
+          head.setAttribute('aria-expanded','true');
+          body.setAttribute('aria-hidden','false');
+        }
+        function close(){ p.classList.remove('open'); head.setAttribute('aria-expanded','false'); body.setAttribute('aria-hidden','true'); }
+
+        head.addEventListener('click', (e)=>{
+          if(p.classList.contains('open')) close(); else open();
+        });
+
+        head.addEventListener('keydown', (e)=>{
+          if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); head.click(); }
+        });
+
+      });
+
+      // optional: open the first panel quickly on load for presentations
+      // if(panels[0]) panels[0].querySelector('.panel-head').click();
+    })();
+  </script>
+</body>
+</html>

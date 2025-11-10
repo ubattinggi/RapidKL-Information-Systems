@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Literature Review | RapidKL — IS Deck</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    html,body { height:auto !important; overflow-y:auto !important; }
+    .content { padding-bottom:40px; }
+    .container-max { max-width:1100px; margin:0 auto; padding:18px; }
+    .page-title { font-family:'Orbitron',sans-serif; color:#dff6ff; font-size:2rem; margin-bottom:6px; }
+    .subtitle { color:#a7c6dc; margin-bottom:25px; }
+
+    /* --- RapidKL Background Section (fixed + glowing) --- */
+    .rapidkl-bg {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 25px;
+      background: linear-gradient(135deg, rgba(0, 245, 255, 0.07), rgba(255, 45, 149, 0.05));
+      border-radius: 20px;
+      padding: 25px 30px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.6);
+      margin-bottom: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .rapidkl-bg:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 45px rgba(0, 245, 255, 0.15), 0 0 30px rgba(255, 45, 149, 0.1);
+    }
+
+    .rapidkl-info {
+      flex: 1;
+      color: #dff6ff;
+    }
+
+    .rapidkl-info h3 {
+      color: #ff7ab3;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+
+    .rapidkl-info p {
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .rapidkl-info ul {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .rapidkl-info li {
+      margin-bottom: 8px;
+    }
+
+    .rapidkl-logo {
+      flex-shrink: 0;
+      width: 150px;
+      border-radius: 10px;
+      box-shadow: 0 0 20px rgba(0, 245, 255, 0.3);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .rapidkl-logo:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 35px rgba(255, 45, 149, 0.4);
+    }
+
+    /* Responsive layout */
+    @media (max-width: 900px) {
+      .rapidkl-bg {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .rapidkl-logo {
+        width: 200px;
+        margin-top: 15px;
+      }
+
+      .rapidkl-info ul {
+        text-align: left;
+      }
+    }
+
+    /* --- Accordion section (unchanged) --- */
+    .timeline { position:relative; margin-top:10px; padding-left:40px; }
+    .timeline::before {
+      content:''; position:absolute; left:16px; top:8px; bottom:0; width:4px;
+      background:linear-gradient(180deg,rgba(0,245,255,0.12),rgba(255,45,149,0.08));
+      border-radius:4px;
+    }
+    .entry { position:relative; margin-bottom:20px; padding:18px 22px 18px 32px;
+      border-radius:12px; background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01));
+      box-shadow:0 8px 24px rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.03);
+      transition:transform .18s ease;
+    }
+    .entry:hover { transform:translateY(-6px); }
+    .entry::before {
+      content:''; position:absolute; left:-12px; top:22px; width:28px; height:28px; border-radius:8px;
+      background:linear-gradient(90deg,rgba(0,245,255,0.16),rgba(123,97,255,0.14));
+      box-shadow:0 6px 18px rgba(0,0,0,0.6);
+    }
+    .entry-head { display:flex; align-items:center; gap:12px; cursor:pointer; user-select:none; }
+    .entry-icon { width:56px; height:56px; border-radius:10px; display:grid; place-items:center;
+      background:linear-gradient(90deg,rgba(0,245,255,0.06),rgba(255,45,149,0.03));
+      color:var(--neon-cyan); font-size:24px; box-shadow:0 8px 20px rgba(0,0,0,0.6);
+    }
+    .entry-title { font-weight:700; color:#ff7ab3; font-size:18px; }
+    .entry-sub { color:var(--muted); font-size:13px; margin-left:6px; }
+    .entry-body { margin-top:12px; display:none; color:#dff6ff; line-height:1.6; font-size:15px; }
+    .entry.open .entry-body { display:block; }
+    .entry-body ul { margin:10px 0 0 18px; padding:0; }
+    .entry-body li { margin-bottom:8px; }
+    .chev { margin-left:auto; background:transparent; border:none; color:#9fbcd6; font-size:18px; transform:rotate(0deg); transition:transform .2s ease; }
+    .entry.open .chev { transform:rotate(90deg); color:#fff; }
+    .frameworks { background:linear-gradient(90deg,rgba(255,209,102,0.04),rgba(123,97,255,0.03)); padding:12px; border-radius:10px; margin-top:10px; }
+
+  </style>
+</head>
+
+<body class="page lit dark">
+  <header class="topbar fun container-max">
+    <div class="brand">
+      <span class="logo-glow">🚇</span>
+      <span class="brand-text">RapidKL — IS Deck</span>
+    </div>
+
+    <nav class="fun-nav" aria-label="Primary">
+      <a class="nav-link" href="index.html"><span class="icon">🏠</span><span class="label">Home</span></a>
+      <a class="nav-link" href="exec.html"><span class="icon">⚡</span><span class="label">Summary</span></a>
+      <a class="nav-link" href="intro.html"><span class="icon">🛰️</span><span class="label">Introduction</span></a>
+      <a class="nav-link active" href="lit.html"><span class="icon">🧩</span><span class="label">Systems</span></a>
+      <a class="nav-link" href="analysis.html"><span class="icon">🔧</span><span class="label">Analysis</span></a>
+      <a class="nav-link" href="conclusion.html"><span class="icon">✔️</span><span class="label">Conclusion</span></a>
+    </nav>
+  </header>
+
+  <main class="content container-max">
+    <h2 class="page-title">🧩 Literature Review / Background</h2>
+    
+    <!-- ✅ RapidKL Background Section (Fixed + Logo Right) -->
+    <div class="rapidkl-bg">
+      <div class="rapidkl-info">
+        <h3>🚉 Background</h3>
+        <p>
+          <strong>Information Systems (IS) form the foundation of modern organizational operations and decision-making. They allow businesses to collect, process, and analyze information to support daily functions, managerial control, and strategic planning. The literature identifies several major types of Information Systems that work together to improve efficiency, coordination, and decision quality within an organization. This section reviews the key types of IS and explains how they can be applied within RapidKL’s transportation services. 
+        </p>
+        </div>
+
+      <img src="rapidkl_logo.jpg" alt="RapidKL Logo" class="rapidkl-logo">
+    </div>
+
+    <!-- ✅ Accordion System Section -->
+    <div class="timeline" id="timeline">
+      <article class="entry" data-key="tps">
+        <div class="entry-head" tabindex="0">
+          <div class="entry-icon">💳</div>
+          <div>
+            <div class="entry-title">Transaction Processing Systems (TPS)</div>
+            <div class="entry-sub">Real-time ticketing and fare collection</div>
+          </div>
+          <button class="chev">›</button>
+        </div>
+        <div class="entry-body">
+          <p>A TPS records ticket sales, card taps and online top-ups in real time. It ensures accurate transaction logs, fast passenger validation at gates, and reliable revenue reporting.</p>
+          <ul>
+            <li>Processes high-volume ticketing and payments instantly.</li>
+            <li>Supports accurate financial reconciliation and service tracking.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry" data-key="mis">
+        <div class="entry-head" tabindex="0">
+          <div class="entry-icon">📊</div>
+          <div>
+            <div class="entry-title">Management Information Systems (MIS)</div>
+            <div class="entry-sub">Reports & dashboards for management</div>
+          </div>
+          <button class="chev">›</button>
+        </div>
+        <div class="entry-body">
+          <p>MIS aggregates TPS and operational data into dashboards and reports — ridership, revenue and punctuality. Managers use these summaries to spot trends, allocate resources, and plan maintenance.</p>
+          <ul>
+            <li>Transforms raw data into clear managerial insights.</li>
+            <li>Enables timely decisions on scheduling and budgets.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry" data-key="dss">
+        <div class="entry-head" tabindex="0">
+          <div class="entry-icon">🧠</div>
+          <div>
+            <div class="entry-title">Decision Support Systems (DSS)</div>
+            <div class="entry-sub">Data-driven planning tools</div>
+          </div>
+          <button class="chev">›</button>
+        </div>
+        <div class="entry-body">
+          <p>DSS combines data, models and simple interfaces to support semi-structured decisions such as route evaluation, peak-hour scheduling and resource allocation using forecasts and scenario analysis.</p>
+          <ul>
+            <li>Useful for planning and "what-if" scenarios.</li>
+            <li>Improves tactical responses to changing demand.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry" data-key="erp">
+        <div class="entry-head" tabindex="0">
+          <div class="entry-icon">🏢</div>
+          <div>
+            <div class="entry-title">Enterprise Systems (ERP / SCM / CRM)</div>
+            <div class="entry-sub">Integration across departments</div>
+          </div>
+          <button class="chev">›</button>
+        </div>
+        <div class="entry-body">
+          <p>ERP centralises finance, HR and operations data for planning and transparency. SCM coordinates spare parts, vehicles and maintenance logistics. CRM stores commuter records and feedback to improve communications and service recovery.</p>
+          <ul>
+            <li>ERP improves budgeting and internal workflows.</li>
+            <li>SCM and CRM support operational reliability and customer relations.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry" data-key="bi">
+        <div class="entry-head" tabindex="0">
+          <div class="entry-icon">📈</div>
+          <div>
+            <div class="entry-title">Business Intelligence & Analytics</div>
+            <div class="entry-sub">Turning data into insights</div>
+          </div>
+          <button class="chev">›</button>
+        </div>
+        <div class="entry-body">
+          <p>BI tools turn operational data into visual insights and forecasts. They help predict peak demand, inform maintenance schedules and guide strategic decisions to improve performance.</p>
+          <ul>
+            <li>Enables evidence-based planning.</li>
+            <li>Supports predictive maintenance and demand forecasting.</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="entry" data-key="theory">
+        <div class="entry-head" tabindex="0">
+          <div class="entry-icon">📘</div>
+          <div>
+            <div class="entry-title">Theoretical Models & Frameworks</div>
+            <div class="entry-sub">IS for value creation & advantage</div>
+          </div>
+          <button class="chev">›</button>
+        </div>
+        <div class="entry-body">
+          <p>Porter’s Value Chain: IS improves primary activities (ticketing, scheduling, customer service) and support activities (finance, HR, IT). Integrated systems reduce inefficiencies, raise service quality and create competitive advantage for RapidKL.</p>
+          <div class="frameworks">
+            <ul>
+              <li><strong>Porter’s Value Chain:</strong> IT-enabled improvements across primary and support activities increase customer value.</li>
+              <li><strong>Competitive advantage:</strong> Integration and reliable service help RapidKL stand out in public transport.</li>
+            </ul>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+
+  <footer class="foot container-max">
+    <a class="small-link" href="intro.html">← Back to Introduction</a>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.entry-head').forEach(head=>{
+      const entry=head.parentElement;
+      head.addEventListener('click',()=>entry.classList.toggle('open'));
+      head.addEventListener('keydown',e=>{
+        if(e.key==='Enter'||e.key===' '){e.preventDefault();entry.classList.toggle('open');}
+      });
+    });
+  </script>
+</body>
+</html>

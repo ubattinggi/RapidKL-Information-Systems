@@ -1,0 +1,543 @@
+/* Dark neon + full-page gradients + fun nav + cover-image styles */
+
+:root{
+  --maxw:1100px;
+
+  /* core palette */
+  --bg-dark:#050617;
+  --card:#071026;
+  --muted:#9aa4b2;
+
+  /* neon accents */
+  --neon-cyan:#00f5ff;
+  --neon-mag:#ff2d95;
+  --neon-violet:#7b61ff;
+  --neon-yellow:#ffd166;
+
+  --glass: rgba(255,255,255,0.03);
+  --radius:14px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.6);
+
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* base */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;color:#e6f7ff;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+
+/* --- Page-level full-colour gradients by page class --- */
+body.page.home { background: radial-gradient(circle at 10% 10%, rgba(0,245,255,0.06), transparent 8%), linear-gradient(180deg,#071026 0%, #0b1020 100%); }
+body.page.exec  { background: radial-gradient(circle at 90% 10%, rgba(123,97,255,0.06), transparent 8%), linear-gradient(180deg,#0b0820 0%, #120926 100%); }
+body.page.intro { background: radial-gradient(circle at 10% 90%, rgba(255,45,149,0.05), transparent 8%), linear-gradient(180deg,#120617 0%, #0a0716 100%); }
+body.page.lit   { background: radial-gradient(circle at 90% 90%, rgba(255,209,102,0.04), transparent 8%), linear-gradient(180deg,#071022 0%, #0b0b19 100%); }
+body.page.analysis { background: radial-gradient(circle at 50% 50%, rgba(123,97,255,0.04), transparent 12%), linear-gradient(180deg,#041023 0%, #050713 100%); }
+body.page.conclusion{ background: radial-gradient(circle at 30% 50%, rgba(0,245,255,0.03), transparent 10%), linear-gradient(180deg,#071024 0%, #050612 100%); }
+
+/* top container constraining */
+.container-max { max-width:var(--maxw); margin:0 auto; padding:0 18px; }
+
+/* header / topbar fun nav */
+.topbar.fun { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:16px 22px; position:relative; z-index:40; }
+.topbar.fun .brand { display:flex; align-items:center; gap:10px; font-weight:700; color:var(--neon-cyan); font-family:'Orbitron', sans-serif; }
+.topbar.fun .brand .logo-glow { filter:drop-shadow(0 0 12px rgba(0,245,255,0.18)); transform:translateY(-1px); font-size:20px; }
+
+.fun-nav { display:flex; align-items:center; gap:10px; background:transparent; padding:8px; border-radius:999px; position:relative; }
+.fun-nav .nav-track {
+  position:absolute; left:0; top:0; bottom:0; width:0; border-radius:999px;
+  background: linear-gradient(90deg, rgba(0,245,255,0.12), rgba(123,97,255,0.08));
+  pointer-events:none; transition:all 300ms cubic-bezier(.2,.9,.22,1);
+  filter: blur(8px);
+  z-index:1;
+}
+
+/* nav-link pills */
+.fun-nav .nav-link {
+  position:relative; z-index:2;
+  display:inline-flex; align-items:center; gap:8px; padding:10px 14px;
+  border-radius:999px; text-decoration:none; color:var(--muted);
+  font-weight:600; font-size:14px; background:transparent; border:1px solid rgba(255,255,255,0.02);
+  transition: transform 180ms ease, color 180ms ease, box-shadow 180ms ease;
+  outline: none;
+}
+.fun-nav .nav-link .icon { font-size:16px; display:inline-block; transform:translateY(-1px) }
+.fun-nav .nav-link .label { display:inline-block }
+
+/* hover/focus/click */
+.fun-nav .nav-link:hover,
+.fun-nav .nav-link:focus {
+  transform:translateY(-4px) scale(1.03);
+  color:#fff;
+  box-shadow: 0 10px 30px rgba(123,97,255,0.08);
+}
+
+/* active look using data-page mapping (JS will set .active) */
+.fun-nav .nav-link.active {
+  color:#041018;
+  background: linear-gradient(90deg, var(--neon-cyan), var(--neon-mag));
+  box-shadow: 0 12px 30px rgba(123,97,255,0.14);
+  transform:translateY(-3px);
+}
+
+/* mobile wrap */
+@media (max-width:860px){
+  .fun-nav { gap:6px; overflow:auto; padding:6px }
+  .fun-nav .nav-link { padding:8px 10px; font-size:13px }
+}
+
+/* page content styles */
+.content, .hero { max-width:var(--maxw); margin:18px auto; padding:18px; }
+
+/* hero and cards */
+.hero { display:flex; gap:18px; align-items:center; padding-top:22px; padding-bottom:22px; }
+.hero-left { flex:1; }
+.hero-right { width:420px; border-radius:14px; padding:18px; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); box-shadow:var(--shadow); }
+
+/* call-to-action pills */
+.cta { display:inline-block; padding:10px 14px; border-radius:12px; text-decoration:none; font-weight:700; color:#041018; background:linear-gradient(90deg,var(--neon-cyan),var(--neon-mag)); box-shadow:0 10px 30px rgba(123,97,255,0.12); margin-right:8px; }
+.cta.ghost { color:var(--neon-cyan); background:transparent; border:1px solid rgba(255,255,255,0.03) }
+
+/* cards */
+.card { background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:20px; border-radius:12px; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,0.03); color:#dff6ff; }
+.lead{color:var(--muted); margin:8px 0 12px}
+
+/* quick stats */
+.quick-stats{display:flex;gap:18px;margin-top:18px}
+.quick-stats .stat{flex:1;background:linear-gradient(90deg, rgba(255,255,255,0.02), transparent);padding:16px;border-radius:12px;text-align:center;border:1px solid rgba(0,245,255,0.06)}
+.count{font-size:30px;font-weight:700;color:var(--neon-cyan)}
+.label{font-size:12px;color:var(--muted);margin-top:6px}
+
+/* cover image styles */
+.cover-image-wrap { position:relative; width:100%; height:100%; display:flex; align-items:center; justify-content:center; flex-direction:column; gap:8px; }
+.cover-image {
+  max-width:100%;
+  height:auto;
+  border-radius:12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.6), 0 0 28px rgba(0,245,255,0.06);
+  border: 1px solid rgba(255,255,255,0.03);
+  transform: translateY(0);
+  transition: transform 300ms ease, box-shadow 300ms ease;
+}
+.cover-image:hover { transform: translateY(-6px) rotate(-0.5deg); box-shadow: 0 26px 60px rgba(0,0,0,0.7), 0 0 40px rgba(0,245,255,0.10); }
+.img-caption { font-size:12px; color:var(--muted); opacity:0.9; }
+
+/* flip-cards, tabs, timeline etc reuse existing classes */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:18px}
+.flip-card{perspective:1000px; cursor:pointer}
+.flip-inner{position:relative; transition:transform .6s; transform-style:preserve-3d; height:140px; border-radius:12px; box-shadow:0 8px 22px rgba(0,0,0,0.6)}
+.flip-card:hover .flip-inner,.flip-card:focus .flip-inner{transform:rotateY(180deg)}
+.flip-front,.flip-back{position:absolute; top:0; left:0; width:100%; height:100%; backface-visibility:hidden; border-radius:12px; display:flex; align-items:center; justify-content:center; padding:12px}
+.flip-front{background: linear-gradient(90deg, rgba(0,245,255,0.04), rgba(255,45,149,0.02)); color:var(--neon-cyan); font-weight:700}
+.flip-back{ transform:rotateY(180deg); background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); color:#dff6ff; text-align:left; padding:14px; border:1px solid rgba(255,255,255,0.02) }
+
+.tabs{display:flex;gap:8px;margin:12px 0}
+.tab{padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);background:transparent;color:var(--muted);cursor:pointer}
+.tab.active{background:linear-gradient(90deg, rgba(0,245,255,0.03), rgba(255,45,149,0.02));box-shadow:0 8px 24px rgba(0,0,0,0.6);color:#fff}
+
+.tab-contents{margin-top:8px}
+.tab-content{display:none}
+.tab-content.active{display:block}
+
+.mini-diagram{display:flex;gap:8px;align-items:center;margin-top:12px}
+.box{background:linear-gradient(90deg, rgba(0,245,255,0.03), transparent);padding:10px 12px;border-radius:8px;border:1px solid rgba(255,255,255,0.02)}
+.arrow{font-size:20px;color:var(--muted)}
+
+.timeline{margin-top:12px}
+.time-item{display:flex;gap:12px;align-items:flex-start;padding:12px 0}
+.dot{width:12px;height:12px;border-radius:50%;background:linear-gradient(90deg,var(--neon-cyan),var(--neon-mag));margin-top:6px;box-shadow:0 6px 18px rgba(255,45,149,0.08)}
+.time-content{background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.02);flex:1}
+
+.challenges{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px;list-style:none;padding:0}
+.challenges li{background:linear-gradient(90deg, rgba(0,245,255,0.02), transparent);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);color:#dff6ff}
+
+.toggle-row{display:flex;gap:12px;margin:8px 0}
+.radio input{margin-right:8px}
+.decision-card{background:linear-gradient(90deg, rgba(0,245,255,0.02), rgba(255,45,149,0.02));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+
+.recommendations{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.rec-option{background:linear-gradient(90deg, rgba(255,255,255,0.01), transparent);padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.02)}
+
+.rec-output{margin-top:12px;background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,0.02);color:#dff6ff}
+
+.neon-hr{border:none;height:1px;background:linear-gradient(90deg, rgba(0,245,255,0.06), rgba(255,45,149,0.06));margin:18px 0}
+
+.muted{color:var(--muted)}
+.small-link{color:var(--neon-cyan); text-decoration:none}
+.foot{max-width:var(--maxw);margin:18px auto;padding:8px 22px;color:var(--muted)}
+
+/* tiny bounce animation for fun */
+@keyframes tiny-bounce { 0% { transform: translateY(0) } 50% { transform: translateY(-4px) } 100% { transform: translateY(0) } }
+.fun-nav .nav-link .icon { transition: transform 220ms ease; }
+.fun-nav .nav-link:hover .icon { transform: translateY(-3px) rotate(-6deg); animation: tiny-bounce 600ms ease; }
+
+/* accessibility focus ring */
+.fun-nav .nav-link:focus { box-shadow: 0 6px 18px rgba(0,245,255,0.06); outline: 3px solid rgba(0,245,255,0.06); }
+
+/* responsive page padding for smaller screens */
+@media (max-width:640px) {
+  .hero { padding:14px; flex-direction:column; }
+  .content { padding:14px }
+  .hero-right { width:100%; order:2; margin-top:12px; }
+  .hero-left { order:1 }
+  .topbar.fun { padding:10px 12px }
+}
+/* --- Student Group Cards --- */
+.student-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.student-card {
+  background: linear-gradient(180deg, rgba(0,245,255,0.03), rgba(255,45,149,0.03));
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 14px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.student-card:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 0 25px rgba(0,245,255,0.15), 0 10px 30px rgba(0,0,0,0.7);
+}
+
+.student-card h4 {
+  margin: 0;
+  font-size: 16px;
+  color: var(--neon-cyan);
+  font-weight: 700;
+}
+
+.student-card .student-role {
+  font-size: 13px;
+  color: #dff6ff;
+  font-style: italic;
+}
+/* Center the group members section */
+.student-group {
+  text-align: center;
+}
+
+/* Center all the cards inside the section */
+.student-cards {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+/* ===== Readability fix for fun-cards (prevents overlapping text) ===== */
+
+/* When a card is open, hide the front elements so only the back is readable */
+.fun-card.open .card-head,
+.fun-card.open .tip {
+  opacity: 0;
+  transform: translateY(-6px);
+  transition: opacity .22s ease, transform .22s ease;
+  pointer-events: none;
+}
+
+/* Make the back panel fully opaque, with stronger contrast and padding */
+.fun-card .back {
+  background: linear-gradient(180deg, rgba(3,9,20,0.96), rgba(5,8,14,0.98));
+  color: #e9fbff;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+/* Improve typography inside the back panel for readability */
+.fun-card .back strong { color: var(--neon-cyan); font-weight:800; }
+.fun-card .back p,
+.fun-card .back li {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #dff6ff;
+  margin: 8px 0;
+}
+
+/* Slight dark overlay behind the opened card so it stands out */
+.fun-card.open::after {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+  border-radius: 14px;
+  pointer-events: none;
+  mix-blend-mode: normal;
+}
+
+/* Ensure the back is on top visually */
+.fun-card .back { z-index: 5; position: absolute; }
+
+/* Make closed front copy crisp and readable (in case of background bleed) */
+.fun-card .card-head h4 { color: var(--neon-mag); text-shadow: 0 1px 0 rgba(0,0,0,0.6); }
+.fun-card .card-head p { color: #dff6ff; }
+
+/* Slightly increase overall contrast & spacing for small screens */
+@media (max-width:720px) {
+  .fun-card .back p,
+  .fun-card .back li { font-size: 15px; line-height: 1.7; }
+  .fun-card { min-height: 150px; padding:14px; }
+}
+
+/* Optional: If you prefer a solid back (uncomment to use) */
+/*
+.fun-card .back {
+  background: #06111a;
+  border: 1px solid rgba(255,255,255,0.04);
+}
+*/
+/* ===== allow page to scroll normally ===== */
+html, body {
+  overflow-y: auto !important;
+  height: auto !important;
+}
+
+/* make sure the main container grows instead of clipping */
+.content {
+  overflow: visible !important;
+  height: auto !important;
+}
+
+/* if intro layout has flex, allow wrapping instead of fixed height */
+.intro-hero {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+/* --- Two big cards per row layout (presentation style) --- */
+
+.fun-cards {
+  display: grid;
+  gap: 28px;
+  margin-top: 28px;
+  justify-items: stretch;
+  /* default for small screens: single column */
+  grid-template-columns: 1fr;
+  align-items: start;
+}
+
+/* On medium+ screens use two columns */
+@media (min-width: 900px) {
+  .fun-cards {
+    grid-template-columns: repeat(2, 1fr); /* two big cards per row */
+  }
+}
+
+/* make each card bigger and presentation friendly */
+.fun-card {
+  min-height: 260px;       /* big card height */
+  padding: 28px 28px;      /* roomy padding */
+  border-radius: 18px;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* title + text sizing for large cards */
+.fun-card h4 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.fun-card p {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* icon enlargement */
+.icon-bubble {
+  width: 64px;
+  height: 64px;
+  font-size: 26px;
+}
+
+/* back panel size & spacing */
+.fun-card .back {
+  padding: 26px;
+  font-size: 16px;
+  line-height: 1.7;
+  border-radius: 14px;
+}
+
+/* hover glow for presentation polish */
+.fun-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.65), 0 0 40px rgba(0,245,255,0.07);
+}
+
+/* mobile tweak: keep cards usable on small screens */
+@media (max-width: 899px) {
+  .fun-card {
+    min-height: 200px;
+    padding: 18px;
+  }
+  .icon-bubble { width:56px; height:56px; font-size:22px; }
+}
+
+/* ---------- Page background - smooth (replace conflicting gradients) ---------- */
+body.page {
+  /* single smooth background for entire page to avoid bands */
+  background: radial-gradient(circle at 10% 8%, rgba(7,26,44,1) 0%, rgba(4,16,32,1) 40%, rgba(2,8,18,1) 100%);
+  color: #dff6ff;
+  min-height: 100vh;
+}
+
+/* ensure main content areas line up */
+main, .container-max {
+  background: transparent;
+}
+
+/* ---------- Team cards area ---------- */
+.team-wrap {
+  display: flex;
+  justify-content: center;        /* center the whole block */
+  padding: 28px 0 36px;           /* tighter vertical spacing */
+  gap: 18px;
+  box-sizing: border-box;
+}
+
+/* grid inside so cards wrap nicely on small screens */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+  width: 100%;
+  max-width: 820px;               /* keeps cards from stretching too wide */
+  align-items: stretch;
+}
+
+/* the cards */
+.team-card {
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border: 1px solid rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 6px;
+  min-height: 86px;
+}
+
+/* name + role styling */
+.team-card .name {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 600;
+  color: #8ff7ff;
+  font-size: 1.05rem;
+}
+.team-card .role {
+  font-family: 'Inter', sans-serif;
+  color: #bfe7f5;
+  font-style: italic;
+  font-size: 0.92rem;
+}
+
+/* small fix for the launch button to match visuals */
+.btn-launch {
+  display: inline-block;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg,#7eeaff,#ff8ec1);
+  color: #041020;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.45);
+}
+
+/* responsive tweak */
+@media (max-width: 700px) {
+  .team-wrap { padding: 18px 12px; }
+  .team-grid { gap: 12px; }
+}
+/* Strong, consistent Orbitron heading used for both section titles */
+.section-title {
+  font-family: 'Orbitron', sans-serif !important; /* uses Orbitron (you already import this) */
+  font-weight: 700 !important;
+  font-size: 2.2rem !important;           /* adjust to match the other heading size */
+  color: #9fe3ff !important;              /* same cyan color */
+  margin: 40px 0 22px 0 !important;
+  letter-spacing: 0.6px !important;
+  text-shadow: 0 6px 18px rgba(13,140,164,0.18), 0 0 10px rgba(159,227,255,0.18) !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Make sure smaller devices scale well */
+@media (max-width:900px) {
+  .section-title { font-size: 1.6rem !important; margin-top: 28px; }
+}
+/* === Fix: Perfectly Center the Group Members Section === */
+.student-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.student-cards {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.student-card {
+  flex: 0 0 220px;
+  min-width: 180px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease-in-out;
+}
+
+.student-card:hover {
+  transform: translateY(-6px);
+}
+
+.student-card .student-name,
+.student-card .student-role {
+  text-align: center;
+  display: block;
+}
+
+/* ---------- SMALLER FOOTER GAP FIX (paste at the BOTTOM of styles.css) ---------- */
+
+/* allow the detail card to shrink to its content (removes big empty block) */
+.detail {
+  min-height: 0 !important;      /* previously 260px — let it size to content */
+  padding-bottom: 12px !important;
+}
+
+/* tighten spacing before the next section */
+.card-section {
+  margin-top: 30px !important;   /* reduce large gap between detail and next section */
+}
+
+/* ensure grid rows don't force extra height */
+.analysis-wrap {
+  align-items: start !important; /* keeps the left timeline and right detail aligned to top */
+}
+
+/* optional — slightly reduce the big shadow area so page looks less 'heavy' */
+.neon-card, .detail {
+  box-shadow: 0 8px 20px rgba(0,0,0,0.45) !important;
+}
+
+/* If you prefer a fixed small height instead of fully auto-sizing, use this instead:
+.detail { min-height: 160px !important; }
+*/
+
